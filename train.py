@@ -165,10 +165,10 @@ def parse_args():
 
 
 def get_raw_data_and_tokenizer():
-    ds = load_dataset("juancopi81/mmm_track_lmd_8bars_nots", split="train")
+    ds = load_dataset("MikeMpapa/mmm_track_lmd_4bars_nots_test", split="train")
     raw_datasets = ds.train_test_split(test_size=0.1, shuffle=True)
     # Change for respective tokenizer
-    tokenizer = AutoTokenizer.from_pretrained("juancopi81/lmd_8bars_tokenizer")
+    tokenizer = AutoTokenizer.from_pretrained("MikeMpapa/lmd_mmm_tokenizer_tutorial_artist")
     return raw_datasets, tokenizer
 
 
@@ -258,28 +258,28 @@ def train(train_config):
     trainer.train()
     if config["push_to_hub"]:
         trainer.push_to_hub()
-        model_wandb = wandb.Artifact(name="trained_model_ckpt", type="model_checkpoint")
-        model_wandb.add_file(
-            "/content/bach_gpt2_simple/js-fake-bach-epochs20/config.json"
-        )
-        model_wandb.add_file(
-            "/content/bach_gpt2_simple/js-fake-bach-epochs20/generation_config.json"
-        )
-        model_wandb.add_file(
-            "/content/bach_gpt2_simple/js-fake-bach-epochs20/pytorch_model.bin"
-        )
-        model_wandb.add_file(
-            "/content/bach_gpt2_simple/js-fake-bach-epochs20/special_tokens_map.json"
-        )
-        model_wandb.add_file(
-            "/content/bach_gpt2_simple/js-fake-bach-epochs20/tokenizer.json"
-        )
-        model_wandb.add_file(
-            "/content/bach_gpt2_simple/js-fake-bach-epochs20/tokenizer_config.json"
-        )
-        model_wandb.add_file(
-            "/content/bach_gpt2_simple/js-fake-bach-epochs20/training_args.bin"
-        )
+        # model_wandb = wandb.Artifact(name="trained_model_ckpt", type="model_checkpoint")
+        # model_wandb.add_file(
+        #     "/content/bach_gpt2_simple/js-fake-bach-epochs20/config.json"
+        # )
+        # model_wandb.add_file(
+        #     "/content/bach_gpt2_simple/js-fake-bach-epochs20/generation_config.json"
+        # )
+        # model_wandb.add_file(
+        #     "/content/bach_gpt2_simple/js-fake-bach-epochs20/pytorch_model.bin"
+        # )
+        # model_wandb.add_file(
+        #     "/content/bach_gpt2_simple/js-fake-bach-epochs20/special_tokens_map.json"
+        # )
+        # model_wandb.add_file(
+        #     "/content/bach_gpt2_simple/js-fake-bach-epochs20/tokenizer.json"
+        # )
+        # model_wandb.add_file(
+        #     "/content/bach_gpt2_simple/js-fake-bach-epochs20/tokenizer_config.json"
+        # )
+        # model_wandb.add_file(
+        #     "/content/bach_gpt2_simple/js-fake-bach-epochs20/training_args.bin"
+        # )
         run.log_artifact(model_wandb)
     run.finish()
 
