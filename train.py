@@ -280,7 +280,7 @@ def train(train_config):
         # model_wandb.add_file(
         #     "/content/bach_gpt2_simple/js-fake-bach-epochs20/training_args.bin"
         # )
-        run.log_artifact(model_wandb)
+        #run.log_artifact(model_wandb)
     run.finish()
 
 
